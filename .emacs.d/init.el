@@ -18,7 +18,7 @@
 (require 'compile)
 (ido-mode t)
 (menu-bar-mode -1)
-(normal-erase-is-backspace-mode 1)
+(normal-erase-is-backspace-mode 0) ;; set to 1 if the backspace is sending help
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (setq column-number-mode t)
@@ -48,6 +48,11 @@
  '(vertical-border ((t nil)))
 )
 
+;; ---------------------- 
+;; -- Package Manager ---
+;; ----------------------
+(load "package-manager.el")
+
 ;; ------------
 ;; -- Macros --
 ;; ------------
@@ -70,8 +75,6 @@
 ;; -- JS Mode configuration --
 ;; ---------------------------
 (load "js-config.el")
-(add-to-list 'load-path "~/.emacs.d/jade-mode") ;; github.com/brianc/jade-mode
-(require 'sws-mode)
-(require 'jade-mode)    
-(add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
-(add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
+(add-hook 'js-mode-hook 'js2-minor-mode)
+(add-hook 'js2-mode-hook 'ac-js2-mode)
+
